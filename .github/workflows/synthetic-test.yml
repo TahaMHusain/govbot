@@ -11,7 +11,7 @@ on:
     paths:
       - .github/workflows/synthetic-test.yml
       - actions/govbot/tapes/nightly/synthetic-test.tape
-      - actions/govbot/src/**
+      - actions/govbot/src/**f
   workflow_dispatch:
 
 jobs:
@@ -51,9 +51,9 @@ jobs:
         run: |
           cd actions/govbot
           cargo build --release
-          mkdir -p "$HOME/.govbot/bin"
-          cp target/release/govbot "$HOME/.govbot/bin/govbot"
-          echo "$HOME/.govbot/bin" >> $GITHUB_PATH
+          mkdir -p "$HOME/govbot_output/bin"
+          cp target/release/govbot "$HOME/govbot_output/bin/govbot"
+          echo "$HOME/govbot_output/bin" >> $GITHUB_PATH
 
       - name: Install VHS dependencies
         run: |
@@ -94,7 +94,7 @@ jobs:
             [ "$vhs_rc" -eq 0 ] || return 1
             test -f /tmp/govbot-synthetic-test.gif || { echo "FAIL: no GIF" >> "$DIAG"; return 1; }
             test -f /tmp/govbot-test/govbot.yml || { echo "FAIL: no govbot.yml" >> "$DIAG"; return 1; }
-            test -d /tmp/govbot-test/.govbot/repos/ || { echo "FAIL: no repos dir" >> "$DIAG"; return 1; }
+            test -d /tmp/govbot-test/govbot_output/repos/ || { echo "FAIL: no repos dir" >> "$DIAG"; return 1; }
             test -d /tmp/govbot-test/docs/ || { echo "FAIL: no docs dir" >> "$DIAG"; return 1; }
           }
 
@@ -114,7 +114,7 @@ jobs:
           echo "=== govbot.yml ==="
           cat /tmp/govbot-test/govbot.yml
           echo "=== Cloned repos ==="
-          ls -la /tmp/govbot-test/.govbot/repos/
+          ls -la /tmp/govbot-test/govbot_output/repos/
           echo "=== Build output ==="
           ls -la /tmp/govbot-test/docs/
 
@@ -146,9 +146,9 @@ jobs:
           fi
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Cloned repos" >> $GITHUB_STEP_SUMMARY
-          if [ -d /tmp/govbot-test/.govbot/repos ]; then
+          if [ -d /tmp/govbot-test/govbot_output/repos ]; then
             echo '```' >> $GITHUB_STEP_SUMMARY
-            ls /tmp/govbot-test/.govbot/repos/ >> $GITHUB_STEP_SUMMARY
+            ls /tmp/govbot-test/govbot_output/repos/ >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
           else
             echo "> No repos were cloned" >> $GITHUB_STEP_SUMMARY

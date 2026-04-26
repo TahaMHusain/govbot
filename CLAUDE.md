@@ -99,14 +99,14 @@ The `govbot load` command loads bill metadata into a DuckDB database for SQL ana
 - Shells out to `duckdb` binary (not a Rust library dependency)
 - Reads all `metadata.json` files from cloned repos
 - Creates `bills` table and `bills_summary` view
-- Database saved to `~/.govbot/govbot.duckdb`
+- Database saved to `~/govbot_output/govbot.duckdb`
 
 **Usage**:
 ```bash
 govbot clone all                    # First, get the data
 govbot load                         # Load into DuckDB
 govbot load --memory-limit 32GB     # For large datasets
-duckdb --ui ~/.govbot/govbot.duckdb # Open in browser UI
+duckdb --ui ~/govbot_output/govbot.duckdb # Open in browser UI
 ```
 
 See `actions/govbot/DUCKDB.md` for query examples and schema documentation.

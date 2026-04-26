@@ -51,7 +51,7 @@ build:
 build-release:
     cargo build --release
 
-# Run govbot CLI with repo-local directory (doesn't touch user's ~/.govbot)
+# Run govbot CLI with repo-local directory (doesn't touch user's ~/govbot_output)
 # Automatically uses .test-govbot as the govbot directory unless --govbot-dir is specified
 # Usage: just govbot [COMMAND] [ARGS...]
 # Examples:
@@ -63,7 +63,7 @@ govbot *ARGS:
     #!/usr/bin/env bash
     set -e
     
-    DEV_DIR=".govbot"
+    DEV_DIR="govbot_output"
     
     # Build release binary if it doesn't exist or if any source files are newer
     if [ ! -f "target/release/govbot" ] || [ "src" -nt "target/release/govbot" ] || find src -name "*.rs" -newer "target/release/govbot" 2>/dev/null | grep -q .; then
@@ -78,7 +78,7 @@ govbot *ARGS:
         # echo "📍 Using custom govbot-dir from arguments"
         ./target/release/govbot {{ARGS}}
     else
-        # echo "📍 Using repo-local directory: $DEV_DIR (your ~/.govbot won't be modified)"
+        # echo "📍 Using repo-local directory: $DEV_DIR (your ~/govbot_output won't be modified)"
         ./target/release/govbot {{ARGS}} --govbot-dir "$DEV_DIR"
     fi
 
@@ -148,7 +148,7 @@ tag *ARGS:
     #!/usr/bin/env bash
     set -e
     
-    DEV_DIR=".govbot"
+    DEV_DIR="govbot_output"
     
     # Build release binary if it doesn't exist or if any source files are newer
     if [ ! -f "target/release/govbot" ] || [ "src" -nt "target/release/govbot" ] || find src -name "*.rs" -newer "target/release/govbot" 2>/dev/null | grep -q .; then

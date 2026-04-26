@@ -1,4 +1,5 @@
 .govbot/
+govbot_output/
 !mocks/**/.govbot/
 country:us/
 govbot.yml
