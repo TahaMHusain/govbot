@@ -73,7 +73,7 @@ Wait+Screen@5s /Pipeline complete/
 Sleep 1s
 
 # Verify outputs
-Type "ls .govbot/repos/"
+Type "ls govbot_output/repos/"
 Enter
 Wait+Screen@5s /gu/
 

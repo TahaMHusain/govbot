@@ -359,10 +359,10 @@ pub fn generate_govbot_yml(repos: &[String], include_example_tag: bool, base_url
     yml
 }
 
-/// Write .gitignore with .govbot entry
+/// Write .gitignore with .govbot and govbot_output entry
 pub fn write_gitignore(cwd: &Path) -> Result<()> {
     let gitignore_path = cwd.join(".gitignore");
-    let gitignore_entry = ".govbot\n";
+    let gitignore_entry = ".govbot\ngovbot_output\n";
 
     if gitignore_path.exists() {
         let mut content = fs::read_to_string(&gitignore_path)?;

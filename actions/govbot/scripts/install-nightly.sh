@@ -3,7 +3,7 @@ set -euo pipefail
 
 REPO="chihacknight/govbot"
 BINARY_NAME="govbot"
-INSTALL_DIR="${HOME}/.govbot/bin"
+INSTALL_DIR="${HOME}/govbot_output/bin"
 INSTALL_PATH="${INSTALL_DIR}/${BINARY_NAME}"
 PROFILE_CANDIDATES=(
   "${HOME}/.zshrc"
